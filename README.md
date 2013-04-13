@@ -15,7 +15,7 @@ Finally there is a simple todo list, unfortunately it does not save data at the 
 - Use localStorage to save todo list
 - Cookie the weather so it only hits the API every 10 minutes or so.
 - Make the page look awesome
-- Make it easier to config incase anyone actually wants to use it
+- Make it easier to config in case anyone actually wants to use it
 
 ### LICENSE
 
