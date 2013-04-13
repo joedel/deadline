@@ -1,0 +1,59 @@
+body {
+  padding: 10px;
+  font-family: 'PT Serif', serif;
+  font-size: 20px;
+  background: #F2F2F2;
+  color: #3C3F40;
+}
+a {
+  color: #3C3F40;
+}
+.container {
+  width: 900px;
+  margin: auto;
+}
+.box {
+  padding: 20px;
+  text-align: center;
+}
+.deadline {
+  color: #F2F2F2;
+  font-size: 90px;
+  background: #389BA6;
+  float: left;
+  width: 530px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  height: 120px;
+}
+.todos {
+  background: #6CCED9;
+  clear: both;
+  text-align: left;
+}
+.todo_done {
+  text-decoration: line-through;
+}
+
+.todos_list {
+  cursor: pointer;
+  /*list-style: none;*/
+  line-height: 60px;
+  font-size: 40px;
+}
+.weather {
+  background: #D9A13B;
+  font-size: 32px;
+  float: left;
+  width: 275px;
+  height: 120px;
+  color: #F2F2F2;
+  margin-bottom: 15px;
+}
+
+.todo_text {
+  height: 50px;
+  font-size: 40px;
+  padding-left: 10px;
+  width: 840px;
+}

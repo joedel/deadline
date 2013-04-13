@@ -1,0 +1,40 @@
+body {
+  padding: 10px;
+  font-family: 'Londrina Solid', cursive;
+  font-size: 30px;
+}
+a {
+  color: #00b7ff;
+}
+.container {
+  width: 900px;
+  margin: auto;
+}
+.box {
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.deadline {
+  font-size: 100px;
+  background: #44b4d5;
+  float: left;
+  width: 530px;
+}
+.todos {
+  background: #7ceb98;
+  clear: both;
+}
+.todo_done {
+  text-decoration: line-through;
+}
+#todos_list {
+  cursor: pointer;
+  list-style: none;
+}
+.weather {
+  background: #36F200;
+  font-size: 100px;
+  float: left;
+  width: 230px;
+}
