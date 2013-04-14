@@ -16,22 +16,34 @@ $(function() {
 
 $(function() {
 	//http://api.wunderground.com/api/API_KEY/conditions/q/pws:KNYNEWYO64.json
-	var weather = "http://api.wunderground.com/api/API_KEY/conditions/q/pws:";
-	var local_station = "KNYNEWYO64";
-	var weather_json = weather + local_station + ".json";
-	$.ajax({
-		url: weather_json,
+	var weather = {};
+
+	if (localStorage.getItem('weather')) {
+		weather = JSON.parse(localStorage.getItem('weather'));
+		$('.weather').html(weather.build_html);
+		console.log("localStorage weather");
+	} else {
+		weather.base_url = "http://api.wunderground.com/api/API_KEY/conditions/q/pws:";
+		weather.local_station = "KNYNEWYO64";
+		weather.json_url = weather.base_url + weather.local_station + ".json";
+		weather.fetched_time = new Date();
+		
+		$.ajax({
+		url: weather.json_url,
 		dataType: "jsonp",
 		success: function(json) {
-			var feels_like = json.current_observation.feelslike_f;
-			var current_temp = json.current_observation.temp_f;
-			var weather_icon = json.current_observation.icon_url.replace("i/c/k/","i/c/i/"); //changes the icon to a different set (a through k works)
-			var wind_mph = json.current_observation.wind_mph;
-			var looks_like = json.current_observation.weather;
-			var build_html = "<img src=" + weather_icon + " /><br/>" + current_temp + "F - " + wind_mph + " MPH";
-			$('.weather').html(build_html);
-		}
-	});
+				weather.feels_like = json.current_observation.feelslike_f;
+				weather.current_temp = json.current_observation.temp_f;
+				weather.icon = json.current_observation.icon_url.replace("i/c/k/","i/c/i/"); //changes the icon to a different set (a through k works)
+				weather.wind_mph = json.current_observation.wind_mph;
+				weather.looks_like = json.current_observation.weather;
+				weather.build_html = "<img src=" + weather.icon + " /><br/>" + weather.current_temp + "F - " + weather.wind_mph + " MPH";
+				$('.weather').html(weather.build_html);
+				localStorage.setItem('weather', JSON.stringify(weather));
+				console.log("Fresh weather");
+			}
+		});
+	}
 });
 
 var TodoList = {
@@ -39,24 +51,34 @@ var TodoList = {
 		var todo_text = $('.todo_text').val();
 		if (todo_text.length > 0) {
 			$('.todos_list').append("<li>" + todo_text + "</li>");
-			TodoList.update_todo_total();
 			$('.todo_text').val("");
+			TodoList.save_todos();
 		}
 	},
 	cross_off_todo: function(todo_done) {
 		$(todo_done).toggleClass('todo_done');
-		TodoList.update_todo_total();
-	},
-	update_todo_total: function() {
-		var todo_total = $('.todos_list').children().not('.todo_done').size();
-		$('#todo_total').text(todo_total + " Left - ");
+		TodoList.save_todos();
+
 	},
 	remove_done_todos: function() {
-		$('.todo_done').remove();
+		$('.todo_done').slideUp(500,function() {
+			$(this).remove();
+			TodoList.save_todos();
+		});
+	},
+	save_todos: function() {
+		$('.todos_list').each(function() {
+			localStorage.setItem("saved_todo",$(this).html());
+		});
 	}
 };
 
 $(function() {
+	if (localStorage.getItem("saved_todo")) {
+		var todo_list = localStorage.getItem("saved_todo");
+		$('.todos_list').html(todo_list);
+	}
+
 	$('#todos_form').on('submit', function(event) {
 		event.preventDefault();
 		TodoList.add_new_todo();
@@ -70,5 +92,7 @@ $(function() {
 		event.preventDefault();
 		TodoList.remove_done_todos();
 	});
+
+
 
 });
