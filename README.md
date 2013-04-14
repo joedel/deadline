@@ -3,17 +3,21 @@ Deadline Home Page
 
 This is a distraction free page you can use as your browsers start page.
 
-It has a countdown until a specified date, maybe that 5k you are going to run?
+### Features
 
-The weather so you know when it's perfect to take a walk (you will need a free Wunderground API key).
+A "days left" countdown until a specified date, maybe that 5k you are going to run?
 
-Finally there is a simple todo list, unfortunately it does not save data at the moment.
+The weather so you know if it's a good time for a walk (uses Wunderground API).
+
+Finally there is a simple todo list which saves to localStorage.
+
 
 ### TODO
 
 
-- Use localStorage to save todo list
-- Cookie the weather so it only hits the API every 10 minutes or so.
+
+- ~~Use localStorage to save todo list~~
+- Save weather data so it only hits the API every 10 minutes or so (done but never expires so currently bugged).
 - Make the page look awesome
 - Make it easier to config in case anyone actually wants to use it
 
