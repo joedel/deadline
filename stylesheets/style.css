@@ -45,7 +45,6 @@ a {
 }
 .todos_list {
   cursor: pointer;
-  /*list-style: none;*/
   margin-left: 20px;
   line-height: 60px;
   font-size: 40px;

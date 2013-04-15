@@ -50,7 +50,7 @@ var TodoList = {
 	add_new_todo: function() {
 		var todo_text = $('.todo_text').val();
 		if (todo_text.length > 0) {
-			$('.todos_list').append("<li>" + todo_text + "</li>");
+			$('.todos_list').prepend("<li>" + todo_text + "</li>");
 			$('.todo_text').val("");
 			TodoList.save_todos();
 		}
