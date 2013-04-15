@@ -1,7 +1,9 @@
 Deadline Home Page
 ============================
 
-This is a distraction free page you can use as your browsers start page.
+This is a distraction free page you can use as your browsers home page. It looks like this:
+<img src="./deadline_screenshot.png?raw=true" />
+
 
 ### Features
 
