@@ -93,7 +93,7 @@ var getWeather = function() {
                 weather.looksLike = json.current_observation.weather;
                 weather.buildHtml = "<img src=" + weather.icon + " /><br/>" + weather.currentTemp + "F - " + weather.windMph + " MPH";
                 $('.weather').html(weather.buildHtml);
-                localStorage.setItem('weather', JSON.stringify(weather));
+                localStorage.setItem('weather', JSON.stringify(weather)); //use localStorage since cookies don't work from file://
                 console.log("Fresh weather");
             }
         }
