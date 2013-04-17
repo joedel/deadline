@@ -17,11 +17,10 @@ Finally there is a simple todo list which saves to localStorage.
 ### TODO
 
 
-
 - ~~Use localStorage to save todo list~~
-- Save weather data so it only hits the API every 10 minutes or so (done but never expires so currently bugged).
+- ~~Save weather data so it only hits the API every 10 minutes or so~~
 - Make the page look awesome
-- Make it easier to config in case anyone actually wants to use it
+- Make it easy to config
 
 ### LICENSE
 
