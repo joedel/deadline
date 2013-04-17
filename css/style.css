@@ -46,8 +46,8 @@ a {
 .todos_list {
   cursor: pointer;
   margin-left: 20px;
-  line-height: 60px;
-  font-size: 40px;
+  line-height: 50px;
+  font-size: 32px;
   color: #105757;
 }
 .todo_text {

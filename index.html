@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Deadline</title>
-	<link rel="stylesheet" href="./stylesheets/style.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=PT+Serif:700' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -10,17 +10,17 @@
 		<div class="box deadline"></div>
 		<div class="box weather"></div>
 		<div class="box todos">
-			<form id="todos_form">
+			<form class="todos_form">
 				<input type="text" name="todo_text" class="todo_text" autofocus="autofocus"></form>
 				<ol class="todos_list"></ol>
-				<span id="todo_total"></span>
-				<span id="remove_done_todo">
-					<a href="#" id="remove_todo">Remove Done Todos</a>
+				<span class="todo_total"></span>
+				<span class="remove_done_todo">
+					<a href="#" class="remove_todo">Remove Done Todos</a>
 				</span>
 		</div>
 	</div>
 	
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="./javascripts/custom.js"></script>
+	<script src="./js/deadline.js"></script>
 </body>
 </html>
