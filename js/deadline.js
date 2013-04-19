@@ -102,6 +102,20 @@ var getWeather = function() {
 
 $(function() {
 
+    $('.config').blur(function() {
+        var config = {};
+        config.api = $('.weather_api').val();
+        config.station = $('.weather_station').val();
+        localStorage.setItem('config', JSON.stringify(config));
+        console.log("stored config");
+    });
+
+    if (localStorage.getItem('config')) {
+        config = JSON.parse(localStorage.getItem('config'));
+        $('.weather_api').val(config.api);
+        $('.weather_station').val(config.station);
+    }
+
     if (localStorage.getItem('weather')) {
         weather = JSON.parse(localStorage.getItem('weather'));
         var timeNow = new Date().getTime();
