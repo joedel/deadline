@@ -71,10 +71,10 @@ $(function() {
 //Weather
 //This is the type of url we have to build:
 //http://api.wunderground.com/api/API_KEY/conditions/q/pws:KNYNEWYO64.json  
-var getWeather = function() {
+var getWeather = function(api, station) {
     var weather = {};
-    weather.apiKey = "API_KEY"; //Put your Wunderground API Key here
-    weather.station = "KNYNEWYO64";  //The name of the weather station from the Wunderground site
+    weather.apiKey = api;
+    weather.station = station;
     weather.jsonUrl = "http://api.wunderground.com/api/" + weather.apiKey + "/conditions/q/pws:" + weather.station + ".json";
     console.log(weather.jsonUrl);
     weather.expires = new Date().getTime() + (1000 * 60 * 5); // five minutes
@@ -102,12 +102,21 @@ var getWeather = function() {
 
 $(function() {
 
+    var config = {};
+
+    $('.settings').hide();
+
+    $('.settings_link').on('click', function(event) {
+            event.preventDefault();
+            $('.settings').fadeToggle();
+    });
+
     $('.config').blur(function() {
-        var config = {};
         config.api = $('.weather_api').val();
         config.station = $('.weather_station').val();
         localStorage.setItem('config', JSON.stringify(config));
-        console.log("stored config");
+        console.log("stored config: " + config);
+        getWeather(config.api, config.station); //get fresh weather when changing settings
     });
 
     if (localStorage.getItem('config')) {
@@ -121,13 +130,13 @@ $(function() {
         var timeNow = new Date().getTime();
         if (timeNow > weather.expires) {
             console.log("Weather expired get new weather");
-            getWeather();
+            getWeather(config.api, config.station);
         } else {
             $('.weather').html(weather.buildHtml);
             console.log("localStorage weather");
         }
     } else {
-      getWeather();
+      getWeather(config.api, config.station);
     }
 });
 
