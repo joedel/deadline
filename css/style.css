@@ -50,6 +50,10 @@ a {
   font-size: 32px;
   color: #105757;
 }
+
+.done_list {
+  margin-left: 20px;
+}
 .todo_text {
   height: 50px;
   font-size: 40px;

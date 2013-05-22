@@ -40,9 +40,8 @@ var TodoList = {
   },
   crossOffTodo: function(todo_done) {
     var done = $(todo_done);
-    done.toggleClass('todo_done');
-    done.detach();
-    $('.done_list').append(done);
+    done.addClass('todo_done');
+    TodoList.animateDoneTodo(done);
     TodoList.saveTodos();
   },
   removeDoneTodos: function() {
@@ -58,6 +57,18 @@ var TodoList = {
 
     $('.done_list').each(function() {
       localStorage.setItem('done_todo',$(this).html());
+    });
+  },
+  animateDoneTodo: function(done) {
+    var oldOffset = done.offset();
+    $('.done_list').append(done);
+    var newOffset = done.offset();
+    var tempSlide = done.clone().appendTo('body');
+    tempSlide.css('position', 'absolute').css('left', oldOffset.left).css('top', oldOffset.top);
+    done.hide();
+    tempSlide.animate({'top': newOffset.top, 'left': newOffset.left}, 800, function() {
+      done.show();
+      tempSlide.remove();
     });
   }
 };
