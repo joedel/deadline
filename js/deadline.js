@@ -2,7 +2,7 @@
 $(function() {
   var day = 1000 * 60 * 60 * 24; //One day in ms
   var today = new Date();
-  var deadline = new Date(2013, 3, 26, 23, 59, 59);
+  var deadline = new Date(2013, 5, 3, 23, 59, 59);
   var daysLeft = Math.floor((deadline - today)/day);
   var daysLeftText = daysLeft;
   if (daysLeft > 1) {
@@ -24,6 +24,11 @@ var TodoList = {
       var todo_list = localStorage.getItem("saved_todo");
       $('.todos_list').html(todo_list);
     }
+
+    if (localStorage.getItem("done_todo")) {
+      var done_list = localStorage.getItem("done_todo");
+      $('.done_list').html(done_list);
+    }
   },
   addNewTodo: function() {
     var todo_text = $('.todo_text').val();
@@ -34,7 +39,10 @@ var TodoList = {
     }
   },
   crossOffTodo: function(todo_done) {
-    $(todo_done).toggleClass('todo_done');
+    var done = $(todo_done);
+    done.toggleClass('todo_done');
+    done.detach();
+    $('.done_list').append(done);
     TodoList.saveTodos();
   },
   removeDoneTodos: function() {
@@ -46,6 +54,10 @@ var TodoList = {
   saveTodos: function() {
     $('.todos_list').each(function() {
       localStorage.setItem("saved_todo",$(this).html());
+    });
+
+    $('.done_list').each(function() {
+      localStorage.setItem("done_todo",$(this).html());
     });
   }
 };
