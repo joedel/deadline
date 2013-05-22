@@ -6,13 +6,13 @@ $(function() {
   var daysLeft = Math.floor((deadline - today)/day);
   var daysLeftText = daysLeft;
   if (daysLeft > 1) {
-    daysLeftText = daysLeft + " days left";
+    daysLeftText = daysLeft + ' days left';
   } else if (daysLeft === 1) {
-    daysLeftText = daysLeft + " day left";
+    daysLeftText = daysLeft + ' day left';
   } else if (daysLeft === 0) {
-    daysLeftText = "This is it!";
+    daysLeftText = 'This is it!';
   } else {
-    daysLeftText = "Day Passed!";
+    daysLeftText = 'Day Passed!';
   }
   $('.deadline').text(daysLeftText);
 });
@@ -20,21 +20,21 @@ $(function() {
 //Todo List
 var TodoList = {
   initLoad: function() {
-    if (localStorage.getItem("saved_todo")) {
-      var todo_list = localStorage.getItem("saved_todo");
+    if (localStorage.getItem('saved_todo')) {
+      var todo_list = localStorage.getItem('saved_todo');
       $('.todos_list').html(todo_list);
     }
 
-    if (localStorage.getItem("done_todo")) {
-      var done_list = localStorage.getItem("done_todo");
+    if (localStorage.getItem('done_todo')) {
+      var done_list = localStorage.getItem('done_todo');
       $('.done_list').html(done_list);
     }
   },
   addNewTodo: function() {
     var todo_text = $('.todo_text').val();
     if (todo_text.length > 0) {
-      $('.todos_list').prepend("<li>" + todo_text + "</li>");
-      $('.todo_text').val("");
+      $('.todos_list').prepend('<li>' + todo_text + '</li>');
+      $('.todo_text').val('');
       TodoList.saveTodos();
     }
   },
@@ -53,11 +53,11 @@ var TodoList = {
   },
   saveTodos: function() {
     $('.todos_list').each(function() {
-      localStorage.setItem("saved_todo",$(this).html());
+      localStorage.setItem('saved_todo',$(this).html());
     });
 
     $('.done_list').each(function() {
-      localStorage.setItem("done_todo",$(this).html());
+      localStorage.setItem('done_todo',$(this).html());
     });
   }
 };
@@ -86,26 +86,26 @@ var getWeather = function(api, station) {
   var weather = {};
   weather.apiKey = api;
   weather.station = station;
-  weather.jsonUrl = "http://api.wunderground.com/api/" + weather.apiKey + "/conditions/q/pws:" + weather.station + ".json";
+  weather.jsonUrl = 'http://api.wunderground.com/api/' + weather.apiKey + '/conditions/q/pws:' + weather.station + '.json';
   console.log(weather.jsonUrl);
   weather.expires = new Date().getTime() + (1000 * 60 * 5); // five minutes
 
   $.ajax({
     url: weather.jsonUrl,
-    dataType: "jsonp",
+    dataType: 'jsonp',
     success: function(json) {
       if (json.response.error) {
         console.log(json.response.error);
       } else {
         weather.feelsLike = json.current_observation.feelslike_f;
           weather.currentTemp = json.current_observation.temp_f;
-          weather.icon = json.current_observation.icon_url.replace("i/c/k/","i/c/i/"); //changes the icon to a different set (a through k works)
+          weather.icon = json.current_observation.icon_url.replace('i/c/k/','i/c/i/'); //changes the icon to a different set (a through k works)
           weather.windMph = json.current_observation.wind_mph;
           weather.looksLike = json.current_observation.weather;
-          weather.buildHtml = "<img src=" + weather.icon + " /><br/>" + weather.currentTemp + "F - " + weather.windMph + " MPH";
+          weather.buildHtml = '<img src=' + weather.icon + ' /><br/>' + weather.currentTemp + 'F - ' + weather.windMph + ' MPH';
           $('.weather').html(weather.buildHtml);
           localStorage.setItem('weather', JSON.stringify(weather)); //use localStorage since cookies don't work from file://
-          console.log("Fresh weather");
+          console.log('Fresh weather');
       }
     }
   });
@@ -125,7 +125,7 @@ $(function() {
     config.api = $('.weather_api').val();
     config.station = $('.weather_station').val();
     localStorage.setItem('config', JSON.stringify(config));
-    console.log("stored config: " + config);
+    console.log('stored config: ' + config);
     getWeather(config.api, config.station); //get fresh weather when changing settings
   });
 
@@ -139,11 +139,11 @@ $(function() {
     weather = JSON.parse(localStorage.getItem('weather'));
     var timeNow = new Date().getTime();
     if (timeNow > weather.expires) {
-      console.log("Weather expired get new weather");
+      console.log('Weather expired get new weather');
       getWeather(config.api, config.station);
     } else {
       $('.weather').html(weather.buildHtml);
-      console.log("localStorage weather");
+      console.log('localStorage weather');
     }
   } else {
     getWeather(config.api, config.station);
